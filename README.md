@@ -1,6 +1,6 @@
 # NYC Restaurant Health Inspection — Score Prediction
 
-A machine learning project to predict restaurant health inspection scores in New York City, using structured violation data, geographic features, and natural language processing on violation descriptions — with rigorous data leakage prevention throughout the pipeline.
+A machine learning project to predict restaurant health inspection scores in New York City, using structured violation data, geographic features, and natural language processing on violation descriptions.
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Platform](https://img.shields.io/badge/Platform-Google%20Colab-orange)
