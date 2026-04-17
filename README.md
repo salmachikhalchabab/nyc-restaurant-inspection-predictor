@@ -235,21 +235,6 @@ The low standard deviation (±0.033) confirms stable generalization across folds
 
 ---
 
-## Data Leakage — Issues Found and Fixed
-
-An earlier version of this project had leakage in four places. All were corrected before final evaluation:
-
-| # | Issue | Root Cause | Fix Applied |
-|---|---|---|---|
-| 1 | TF-IDF fitted on all data | `vec.fit_transform(agg)` ran before `train_test_split` | Moved inside `Pipeline` — fitted on `X_train` only |
-| 2 | KMeans fitted on all data | `kmeans.fit_predict(agg)` ran before split | Custom `GeoCluster` transformer inside `Pipeline` |
-| 3 | Optuna evaluating on random splits | Each trial called `train_test_split(agg)` independently | Replaced with `cross_val_score(cv=3, X_train)` per trial |
-| 4 | PCA on dense TF-IDF matrix | `sklearn.PCA` required `.toarray()` → ~4 GB RAM | Replaced with `TruncatedSVD` — works on sparse directly |
-
-Without these fixes, the inflated R² from the original code (~0.85+) was not trustworthy. The corrected pipeline yields an honest **Test R² = 0.832**.
-
----
-
 ## Key Findings
 
 - `violation_count` and `critical_count` are by far the strongest predictors of inspection score
